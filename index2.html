@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+<style>
+  :root {
+    --pink: #fbb6ce;
+    --lavender: #c4b5fd;
+    --peach: #fdba74;
+    --gold: #fcd34d;
+    --bg: #fff0f6;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+  body { background: var(--bg); min-height:100vh; overflow:hidden; }
+
+  /* Floating hearts */
+  .heart {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: var(--pink);
+    transform: rotate(45deg);
+    animation: floatHeart linear infinite;
+    opacity: 0.7;
+  }
+  .heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--pink);
+    border-radius: 50%;
+  }
+  .heart::before { top:-6px; left:0; }
+  .heart::after { left:-6px; top:0; }
+
+  @keyframes floatHeart {
+    0% { transform: translateY(100vh) rotate(45deg); }
+    100% { transform: translateY(-20vh) rotate(45deg); }
+  }
+
+  header { text-align:center; padding:4rem 2rem; }
+  header h1 {
+    font-size:3rem;
+    color: var(--lavender);
+    text-shadow: 0 0 20px var(--pink);
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { text-shadow:0 0 10px var(--pink);} 
+    to { text-shadow:0 0 30px var(--gold);} 
+  }
+
+  .quotes { display:grid; gap:1rem; max-width:700px; margin:2rem auto; }
+  .quote { background: rgba(255,255,255,0.6); padding:1rem 1.5rem; border-radius:15px;
+           font-style:italic; color:#7f1d1d; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+
+  .letter-container { display:flex; justify-content:center; margin:4rem 0; }
+  .letter {
+    width:280px; height:180px; background: linear-gradient(135deg,var(--peach),var(--pink));
+    border-radius:15px; cursor:pointer; box-shadow:0 15px 30px rgba(0,0,0,0.3);
+    display:flex; align-items:center; justify-content:center; font-size:3rem; transition: transform 0.3s;
+  }
+  .letter:hover { transform: scale(1.05) rotate(-2deg); }
+
+  .modal { position: fixed; inset:0; background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; display:none; }
+  .modal.active { display:flex; }
+  .modal-content { background: linear-gradient(135deg, #fff0f6, #fcd34d); padding:3rem; border-radius:25px; text-align:center; animation:pop 0.5s ease; max-width:90%; }
+  @keyframes pop { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
+  .modal-content h2 { font-size:2rem; margin-bottom:1rem; color:#7f1d1d; }
+  .btn { padding:0.7rem 1.5rem; border:none; border-radius:50px; margin:0.5rem; font-size:1rem; cursor:pointer; transition: transform 0.2s; }
+  .btn:hover { transform: scale(1.1); }
+  .yes { background: #f472b6; color:white; }
+  .no { background: #a78bfa; color:white; }
+
+  footer { text-align:center; padding:3rem 1rem; color:#7f1d1d; opacity:0.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>For Hloni 💖</h1>
+  <p>Every heartbeat whispers your name...</p>
+</header>
+
+<section class="quotes">
+  <div class="quote">"Hloni, you make my world glow brighter than gold."</div>
+  <div class="quote">"Happiness is seeing your smile, Hloni."</div>
+  <div class="quote">"Hloni, my favorite place is wherever you are."</div>
+</section>
+
+<div class="letter-container">
+  <div class="letter" id="openLetter">💌</div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2>Hloni, will you be mine? 💖</h2>
+    <button class="btn yes" onclick="yes()">Yes 💖</button>
+    <button class="btn no" onclick="no()">Hmm…</button>
+  </div>
+</div>
+
+<footer>
+  Made with love, soft pastels, and sparkles ✨
+</footer>
+
+<script>
+  // floating hearts
+  for(let i=0;i<30;i++){
+    const h=document.createElement('div'); h.className='heart';
+    h.style.left=Math.random()*100+'vw';
+    h.style.animationDuration=(8+Math.random()*4)+'s';
+    h.style.opacity=Math.random();
+    document.body.appendChild(h);
+  }
+
+  const modal=document.getElementById('modal');
+  document.getElementById('openLetter').onclick=()=>modal.classList.add('active');
+
+  function yes(){
+    document.querySelector('.modal-content').innerHTML='<h2>Hloni said YES! 💖💖💖</h2><p>This moment is magical ✨</p>';
+  }
+  function no(){
+    alert('Wrong button 😌 Try again');
+  }
+</script>
+
+</body>
+</html>
